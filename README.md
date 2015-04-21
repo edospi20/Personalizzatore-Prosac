@@ -1,2 +1,2 @@
 # Personalizzatore-Prosac
-This tool allows the users to customize their papillons
+This tool allow the users to customize their papillons
