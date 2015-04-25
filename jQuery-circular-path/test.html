@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Pasta con tonno</title>
+<meta charset="utf-8">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/weepy/jquery.path/master/jquery.path.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/jaukia/easie/master/build/jquery.easie-min.js"></script>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="RailwayCloths.js"></script>
+<script type="text/javascript" src="animate-circle.js"></script>
+
+<style>
+
+.cloth {
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	overflow: hidden;
+	border-radius: 30px;
+	box-shadow: 2px 2px 7px black;
+	border: 2px solid black;
+}
+
+.cloth img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	/* Insert vendor prefixes here */
+	transform: translate(-50%, -50%);
+	z-index: 0;
+}
+
+#wrapper {
+	background: orange;
+	position: relative;
+}
+
+</style>
+
+</head>
+
+<body onload="init()">
+
+<div id="wrapper">
+	<button id="left">&larr;</button>
+	<button id="right">&rarr;</button>
+</div>
+
+</body>
+
+</html>

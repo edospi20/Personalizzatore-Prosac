@@ -1,0 +1,12 @@
+# Qui ci sono i pattern dei file che git non
+# inserisce nel repository, es Thumbs.db o
+# desktop.ini
+
+# Windows
+
+**/Thumbs.db
+**/desktop.ini
+
+# Linux
+
+**/*~
