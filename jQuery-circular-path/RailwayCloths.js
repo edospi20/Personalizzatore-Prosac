@@ -41,15 +41,19 @@ $.RailwayCloth = function(wrapper, images, conf) {
 		else // (conf.directon == 'right')
 			centerX = wrapper.width() * (conf.width + conf.spaceHoriz) / 100; // il raggio non serve
 
+	/*
+
 	if (conf.spaceVert == 'center')
-		var centerY = wrapper.height() - this.center.radius; // * 2 / 2
+		var centerY = wrapper.height() - this.circle.radius; // * 2 / 2
 	else
 		var centerY = wrapper.height() * conf.spaceVert / 100;
+
+	*/
+	var centerY = 0; // provvisorio,necessario un wrapper alto almeno due volte il raggio
 	if (conf.direction == 'right')
 		centerY += this.circle.radius;
 	else // (conf.direction == 'left')
-		centerY += this.circle.radius * Math.sin(Math.toRadians
-			(conf.startAngle - 90)) + wrapper.height() * conf.spaceTop / 100;
+		centerY += this.circle.radius * Math.sin(Math.toRadians(conf.startAngle - 90));
 
 	this.circle.center = [centerX, centerY]; // 06
 
@@ -57,7 +61,7 @@ $.RailwayCloth = function(wrapper, images, conf) {
 	this.clothsDistance = (wrapper.width() * conf.rectWidth / 100 + archLength)
 		/ conf.elements;
 	this.angleStep = Math.round(Math.toDegrees(Math.acos(1 - this.clothsDistance *
-		this.clothsDistance / (2 * this.circle.radius * this.circle.radius)));
+		this.clothsDistance / (2 * this.circle.radius * this.circle.radius))));
 	this.nInCircle = Math.ceil((360 - conf.startAngle) / this.angleStep);
 	this.nInRect = conf.elements - this.nInCircle;
 
