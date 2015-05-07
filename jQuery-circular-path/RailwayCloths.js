@@ -8,6 +8,16 @@ TODO:
 
 */
 
+// Per maggior leggibilità
+Math.toDegrees = function(radians) {
+	return 180 / Math.PI * radians;
+};
+
+// Per maggior leggibilità
+Math.toRadians = function(degrees) {
+	return Math.PI / 180 * degrees;
+};
+
 // Oltre a costruire l'oggetto, anima le stoffe
 $.RailwayCloth = function(wrapper, images, conf) {
 	this.images = images;
@@ -20,18 +30,35 @@ $.RailwayCloth = function(wrapper, images, conf) {
 	this.circle = { // 04
 		radius: wrapper.width() * conf.width * (100 - conf.rectWidth) / 10000 // 05
 	};
-	this.circle.center = [
-		this.circle.radius + wrapper.width() * conf.spaceLeft / 100,
-		this.circle.radius * Math.sin((conf.startAngle - 90) * Math.PI / 180)
-			+ wrapper.height() * conf.spaceTop / 100
-	]; // 06
 
-	var archLength = (360 - conf.startAngle) * Math.PI / 180 * this.circle.radius;
+	var centerX = this.circle.radius;
+
+	if (conf.spaceHoriz == 'center')
+		centerX += wrapper.width() * (100 - conf.width) / 200;
+	else
+		if (conf.direction == 'left')
+			centerX += wrapper.width() * conf.spaceHoriz / 100;
+		else // (conf.directon == 'right')
+			centerX = wrapper.width() * (conf.width + conf.spaceHoriz) / 100; // il raggio non serve
+
+	if (conf.spaceVert == 'center')
+		var centerY = wrapper.height() - this.center.radius; // * 2 / 2
+	else
+		var centerY = wrapper.height() * conf.spaceVert / 100;
+	if (conf.direction == 'right')
+		centerY += this.circle.radius;
+	else // (conf.direction == 'left')
+		centerY += this.circle.radius * Math.sin(Math.toRadians
+			(conf.startAngle - 90)) + wrapper.height() * conf.spaceTop / 100;
+
+	this.circle.center = [centerX, centerY]; // 06
+
+	var archLength = Math.toRadians(360 - conf.startAngle) * this.circle.radius;
 	this.clothsDistance = (wrapper.width() * conf.rectWidth / 100 + archLength)
 		/ conf.elements;
-	this.angleStep = Math.round(Math.acos(1 - this.clothsDistance * this.clothsDistance
-		/ (2 * this.circle.radius * this.circle.radius)) * 180 / Math.PI);
-	this.nInCircle = Math.floor((360 - conf.startAngle) / this.angleStep) + 1;
+	this.angleStep = Math.round(Math.toDegrees(Math.acos(1 - this.clothsDistance *
+		this.clothsDistance / (2 * this.circle.radius * this.circle.radius)));
+	this.nInCircle = Math.ceil((360 - conf.startAngle) / this.angleStep);
 	this.nInRect = conf.elements - this.nInCircle;
 
 	var zIndex = conf.elements;
@@ -64,7 +91,6 @@ $.RailwayCloth.prototype.animateRailway = function(imageIndex, button) {
 	this.circle.end = this.conf.startAngle + (this.nInCircle - 1) * this.angleStep; // 07
 	this.circle.dir = this.dirNumber('counter-clockwise');
 
-	var nextImage = function(index, obj) { return (index + 1) % obj.images.length; };
 	var nOut = this.nInRect;
 	var circleEase = 'easieEaseIn';
 	var circleDuration = this.conf.startAnimDuration * 400;
@@ -92,7 +118,7 @@ $.RailwayCloth.prototype.animateRailway = function(imageIndex, button) {
 
 		}
 
-		imageIndex = nextImage(imageIndex, this);
+		imageIndex = (imageIndex + 1) % this.images.length;
 	}
 };
 
