@@ -55,7 +55,7 @@ altrimenti se ha 'right' a quello destro
 'center' centra orizzontalmente la rotaia
 
 */
-config.railway.spaceHoriz = 'center';
+config.railway.spaceHoriz = 15;
 
 /*
 

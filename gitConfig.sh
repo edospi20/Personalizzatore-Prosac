@@ -14,9 +14,9 @@
 
 REMOTE_NAME=$1
 EXPIRE_TIME=$(( $2 * 3600 ))
-REMOTE_URL='https://github.com/edospi20/Personalizzatore-Prosac.git Personalizzatore\ Prosac'
+REMOTE_URL='https://github.com/edospi20/Personalizzatore-Prosac.git'
 
-if [[ -n $(git remote show | grep origin) ]]; then
+if [[ -z $(git remote show | grep origin) ]]; then
 	git remote add $REMOTE_NAME $REMOTE_URL
 else
 	git remote rename origin $REMOTE_NAME

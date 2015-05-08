@@ -35,21 +35,22 @@ $.RailwayCloth = function(wrapper, images, conf) {
 
 	if (conf.spaceHoriz == 'center')
 		centerX += wrapper.width() * (100 - conf.width) / 200;
-	else
+	else	// Se in spaceHoriz metto un numero nel config.js
 		if (conf.direction == 'left')
 			centerX += wrapper.width() * conf.spaceHoriz / 100;
 		else // (conf.directon == 'right')
-			centerX = wrapper.width() * (conf.width + conf.spaceHoriz) / 100; // il raggio non serve
-
+			centerX = wrapper.width() * (100 - conf.spaceHoriz) / 100 - this.circle.radius; // il raggio non serve
+			
 	/*
 
 	if (conf.spaceVert == 'center')
-		var centerY = wrapper.height() - this.circle.radius; // * 2 / 2
+		var centerY = (wrapper.height() - this.circle.radius *
+			(Math.sin(Math.toRadians(conf.startAngle - 90)) + 1)) / 2;
 	else
 		var centerY = wrapper.height() * conf.spaceVert / 100;
 
 	*/
-	var centerY = 0; // provvisorio,necessario un wrapper alto almeno due volte il raggio
+	var centerY = 0; // provvisorio, necessario un wrapper alto almeno due volte il raggio
 	if (conf.direction == 'right')
 		centerY += this.circle.radius;
 	else // (conf.direction == 'left')
@@ -57,12 +58,13 @@ $.RailwayCloth = function(wrapper, images, conf) {
 
 	this.circle.center = [centerX, centerY]; // 06
 
-	var archLength = Math.toRadians(360 - conf.startAngle) * this.circle.radius;
+	var endAngle = conf.direction == 'left' ? 360 : 180;	// Quando le direzioni sono diverse, gli angoli finali sono diversi
+	var archLength = Math.toRadians(endAngle - conf.startAngle) * this.circle.radius;
 	this.clothsDistance = (wrapper.width() * conf.rectWidth / 100 + archLength)
 		/ conf.elements;
 	this.angleStep = Math.round(Math.toDegrees(Math.acos(1 - this.clothsDistance *
 		this.clothsDistance / (2 * this.circle.radius * this.circle.radius))));
-	this.nInCircle = Math.ceil((360 - conf.startAngle) / this.angleStep);
+	this.nInCircle = Math.ceil((endAngle - conf.startAngle) / this.angleStep);
 	this.nInRect = conf.elements - this.nInCircle;
 
 	var zIndex = conf.elements;
@@ -99,6 +101,7 @@ $.RailwayCloth.prototype.animateRailway = function(imageIndex, button) {
 	var circleEase = 'easieEaseIn';
 	var circleDuration = this.conf.startAnimDuration * 400;
 	var rectDuration = this.conf.startAnimDuration * 500;
+	var leftInc = this.conf.direction == 'left' ? '+=' : '-=';	// per far si che le stoffe si posizionino più a dx o più a sx in base al valore di conf.direction
 
 	for (var k in this.clothsList) {
 		var cloth = this.clothsList[k];
@@ -108,11 +111,11 @@ $.RailwayCloth.prototype.animateRailway = function(imageIndex, button) {
 
 		if (nOut > 0) {
 			if (button && nOut == this.nInRect)
-				cloth.elem.animate({left: '+=' + nOut * this.clothsDistance
+				cloth.elem.animate({left: leftInc + nOut * this.clothsDistance
 					+ 'px'}, rectDuration, 'easieEaseOut', function(){
 					button.prop('disabled', false); });
 			else
-				cloth.elem.animate({left: '+=' + nOut * this.clothsDistance
+				cloth.elem.animate({left: leftInc + nOut * this.clothsDistance
 					+ 'px'}, rectDuration, 'easieEaseOut');
 			nOut -= 1;
 		}
