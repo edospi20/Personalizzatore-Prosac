@@ -27,36 +27,35 @@ $.RailwayCloth = function(wrapper, images, conf) {
 	this.clothsList = []; // 02
 
 	// var minDim = Math.min(wrapper.width(), wrapper.height());
-	this.circle = { // 04
-		radius: wrapper.width() * conf.width * (100 - conf.rectWidth) / 10000 // 05
+	this.circle = { // 03
+		radius: wrapper.width() * conf.width * (100 - conf.rectWidth) / 10000 // 04
 	};
 
 	var centerX = this.circle.radius;
-
 	if (conf.spaceHoriz == 'center')
-		centerX += wrapper.width() * (100 - conf.width) / 200;
-	else	// Se in spaceHoriz metto un numero nel config.js
+		centerX += wrapper.width() * (100 - conf.width) / 200; // 05
+	else // conf.spaceHoriz è un numero (percentuale)
 		if (conf.direction == 'left')
 			centerX += wrapper.width() * conf.spaceHoriz / 100;
 		else // (conf.directon == 'right')
-			centerX = wrapper.width() * (100 - conf.spaceHoriz) / 100 - this.circle.radius; // il raggio non serve
-			
+			centerX = wrapper.width() * (100 - conf.spaceHoriz) / 100
+				- this.circle.radius; // 06
 	/*
 
 	if (conf.spaceVert == 'center')
 		var centerY = (wrapper.height() - this.circle.radius *
-			(Math.sin(Math.toRadians(conf.startAngle - 90)) + 1)) / 2;
+			(Math.sin(Math.toRadians(conf.startAngle - 90)) + 1)) / 2; // 07
 	else
 		var centerY = wrapper.height() * conf.spaceVert / 100;
 
 	*/
-	var centerY = 0; // provvisorio, necessario un wrapper alto almeno due volte il raggio
+	var centerY = 0; // provvisorio, necessario un wrapper più alto
 	if (conf.direction == 'right')
 		centerY += this.circle.radius;
 	else // (conf.direction == 'left')
-		centerY += this.circle.radius * Math.sin(Math.toRadians(conf.startAngle - 90));
+		centerY += this.circle.radius * Math.sin(Math.toRadians(conf.startAngle - 90)); // 08
 
-	this.circle.center = [centerX, centerY]; // 06
+	this.circle.center = [centerX, centerY];
 
 	var endAngle = conf.direction == 'left' ? 360 : 180;	// Quando le direzioni sono diverse, gli angoli finali sono diversi
 	var archLength = Math.toRadians(endAngle - conf.startAngle) * this.circle.radius;
@@ -111,11 +110,11 @@ $.RailwayCloth.prototype.animateRailway = function(imageIndex, button) {
 
 		if (nOut > 0) {
 			if (button && nOut == this.nInRect)
-				cloth.elem.animate({left: leftInc + nOut * this.clothsDistance
+				cloth.elem.velocity({left: leftInc + nOut * this.clothsDistance
 					+ 'px'}, rectDuration, 'easieEaseOut', function(){
 					button.prop('disabled', false); });
 			else
-				cloth.elem.animate({left: leftInc + nOut * this.clothsDistance
+				cloth.elem.velocity({left: leftInc + nOut * this.clothsDistance
 					+ 'px'}, rectDuration, 'easieEaseOut');
 			nOut -= 1;
 		}
@@ -130,30 +129,102 @@ $.RailwayCloth.prototype.animateRailway = function(imageIndex, button) {
 };
 
 $.RailwayCloth.prototype.fastForward = function(button) {
-	this.firstDisplayed = (this.firstDisplayed + this.clothsList.length) % this.images.length;
+	this.firstDisplayed = (this.firstDisplayed + this.conf.elements)
+		% this.images.length;
 	this.animateRailway(this.firstDisplayed, button);
 };
 
 $.RailwayCloth.prototype.rewind = function(button) {
-	this.firstDisplayed = (this.firstDisplayed - this.clothsList.length
+	this.firstDisplayed = (this.firstDisplayed - this.conf.elements
 		+ this.images.length) % this.images.length;
 	this.animateRailway(this.firstDisplayed, button);
 };
 
 /* 01
 
-La porzione dell'array contenente le immagini che
-non sono visualizzate va da head a head + nUndisplayed.
-È più efficiente che usare due indici poiché il
-numero di elementi non visualizzati resta costante
+firstDisplayed individua l'indice nell'array
+delle immagini della prima stoffa visualizzata
+nella rotaia.
 
 */
 
 /* 02
 
-Mantiene informazioni sugli elementi html che
-racchiudono le stoffe e sulla loro posizione,
-in termini di angolo all'interno del cerchio
+Mantiene dei rifetimenti agli oggetti jQuery
+relativi agli elementi HTML che visualizzano le
+stoffe
+
+*/
+
+/* 03
+
+Essendo center e radius fissi, è bene calcolarli
+una sola volta, e settare poi ogni volta solo gli
+altri attributi, che invece variano
+
+*/
+
+/* 04
+
+La lunghezza del raggio è data dalla larghezza
+della rotaia meno quella della parte dritta.
+Si divide per 10000 perché si hanno due
+percentuali, della rotaia rispetto al wrapper
+e del raggio rispetto alla rotaia
+
+*/
+
+/* 05
+              wrapper.width()
+|-----------------------------------------|
+				conf.width
+|___|---------------------------------|___|
+  ^      _________________________      ^
+  |      | Devono essere uguali  |      |
+  |      | dunque divido per 2   |      |
+  |______| la differenza, e poi  |______|
+         | per 100 perché è una  |
+         | percentuale           |
+         -------------------------
+
+*/
+
+/* 06
+         wrapper.width()
+|------------------------------------|
+                 radius   spaceHoriz
+|______________|--------|------------|
+        ^
+        |
+     -----------------------
+     | Mi serve questa qui |
+     | fatta con gli _     |
+     -----------------------
+
+*/
+
+/* 07
+
+Per centrare verticalmente la rotaia,
+è sufficiente dare come margin verticale
+la metà della parte di altezza del wrapper
+che questa non occupa, e cioè
+
+	(wrapper.height() - <altezza rotaia>) / 2
+
+Per l'altezza della rotaia, vedere commento 08
+
+*/
+
+/* 08
+
+L'altezza della rotaia è data da:
+
+	radius * sin(startAngle) + radius ==
+	radius * (sin(startAngle) + 1)
+
+A startAngle si sottrae 90 per il sistema
+di coordinate usato dalla libreria jQuery-path
 
 */
 
@@ -164,29 +235,6 @@ che le posizioni finali differiscano di uno
 stesso angolo. Per far sì che occupino tutta la
 circonferenza, questo angolo deve essere pari
 a (360 / numero stoffe)
-
-*/
-
-/* 04
-
-Essendo center e radius fissi, è bene calcolarli
-una sola volta, e settare poi ogni volta solo gli
-altri attributi, che invece variano
-
-*/
-
-/* 05
-
-Si divide per 200 perché il raggio è metà del
-diametro, e dunque della larghezza totale
-
-*/
-
-/* 06
-
-Il centro del cerchio dista dal bordo superiore
-dell'elemento che contiene il cerchio stesso di
-una quantità pari a (raggio + margin)
 
 */
 

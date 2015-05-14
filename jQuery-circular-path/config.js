@@ -1,10 +1,29 @@
 /*
 
-File con i valori di configurazione
+In questo file si trova l'oggetto di
+configurazione con i valori di default.
+Per usare dei valori diversi, clonarlo
+con la funzione config.clone() e cambiare
+i valori dell'oggetto clonato
+
 
 */
 
 var config = {};
+
+config.clone = function(obj) {
+	obj = obj || this;
+	var clonedConfig = {};
+	for (var key in obj) {
+		var value = obj[key];
+		if (typeof(value) == 'object' && !(value instanceof Function))
+			clonedConfig[key] = config.clone(value);
+		else
+			clonedConfig[key] = value;
+	}
+	return clonedConfig;
+};
+
 config.railway = {};
 
 /*
