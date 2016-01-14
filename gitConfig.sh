@@ -35,11 +35,12 @@ if [[ -z $REMOTE_NAME ]]; then
 	echo Enter the name you wish to use as a shortcut for the repository
 	read REMOTE_NAME
 fi
+EXPIRE_TIME=$2
 if [[ -z $2 ]]; then
 	echo Enter the amount of hours you wish your credential to be cached for
 	read EXPIRE_TIME
 fi
-EXPIRE_TIME=$(( $2 * 3600 ))
+EXPIRE_TIME=$(( $EXPIRE_TIME * 3600 ))
 
 # Doing all the other stuff
 
