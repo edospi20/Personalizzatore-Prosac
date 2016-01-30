@@ -1,0 +1,30 @@
+#wrapper {
+	background: orange;
+	position: relative;
+}
+
+.accessory {
+	width: 4em;
+	height: 4em;
+	position: relative;		/*Si vedrà se farla absolute*/
+	overflow: hidden;
+	border-radius: 1em;
+	box-shadow: 0.1em 0.1em 0.2em grey;	/*rispettivamente h-shadow(posizione orizzontale), v-shadow(posizione verticale), spread(dimensione ombra), color*/
+	cursor: pointer;
+}
+
+.accessory img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	/*Insert vendor prefixes here*/
+	transform: translate(-50%, -50%);
+	z-index: 0;
+}
+
+.typeAcc{
+	text-transform: uppercase;
+	font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 1.05vw;
+	position: relative;
+}
