@@ -5,8 +5,13 @@
 		<meta charset="utf-8">
 		<title>Prosac Alwaysmile - Personalizzatore Papillon</title>
 
-		<link rel="stylesheet" href="./Css/rails.css" type="text/css" media="screen"/>
-		<link rel="stylesheet" href="./Css/papi.css" type="text/css" media="screen"/>
+		<link rel="stylesheet" href="./css/rails.css" type="text/css" media="screen"/>
+		<link rel="stylesheet" href="./css/papi.css" type="text/css" media="screen"/>
+		<link rel="stylesheet" href="https://rawgit.com/drien/jquery-flipster/master/dist/jquery.flipster.min.css" type="text/css" media="screen"/>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script src="https://rawgit.com/drien/jquery-flipster/master/dist/jquery.flipster.min.js"></script>
+		<script src="./js/index.js"></script>
 	</head>
 
 	<body>
@@ -14,12 +19,14 @@
 			<button id="left">&larr;</button>
 			<button id="right">&rarr;</button>
 		</div>
-		
-		<div class = "accessory">
-			<img src="./img/color1.png"></img>
-		</div>
-		<p class = "typeAcc">Stoffe</p>
-		<p class = "typeAcc">Nastrini</p>
-		<p class = "typeAcc">Bottoni</p>
+
+		<h1 class="type-acc">Stoffe</h1>
+		<div id="cloths" class="accessory"><ul></ul></div>
+
+		<h1 class="type-acc">Nastrini</h1>
+		<div id="bands" class="accessory"><ul></ul></div>
+
+		<h1 class="type-acc">Bottoni</h1>
+		<div id="buttons" class="accessory"><ul></ul></div>
 	</body>
 </html>
