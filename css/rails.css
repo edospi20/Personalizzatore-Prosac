@@ -3,6 +3,10 @@
 	position: relative;
 }
 
+ul > li:focus {
+	border: 3px solid navy;
+}
+
 .accessory ul {
 	padding: 0;
 }
