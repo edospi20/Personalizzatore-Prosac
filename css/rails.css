@@ -3,7 +3,16 @@
 	position: relative;
 }
 
-ul > li:focus {
+#cloths {
+	width: 80%;
+	margin: auto;
+}
+
+#cloths div > img {
+	margin: auto;
+}
+
+#cloths div:focus > img {
 	border: 3px solid navy;
 }
 
