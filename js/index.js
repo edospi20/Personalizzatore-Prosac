@@ -6,7 +6,7 @@ var cloths = $('#cloths');
 
 cloths.slick({
 	accessibility: true,
-	arrows: true,
+	arrows: false,
 	dots: true,
 	focusOnSelect: true,
 	infinite: true,
@@ -19,8 +19,8 @@ cloths.slick({
 	
 	// TODO: LE FRECCE NON FUNZIANOH
 	
-	prevArrow: '<button type="button" class="slick-prev">&lt;</button>',
-	nextArrow: '<button type="button" class="slick-prev">&gt;</button>',
+	/*prevArrow: '<button type="button" class="slick-prev">&lt;</button>',
+	nextArrow: '<button type="button" class="slick-next">&gt;</button>',*/
 	
 });
 

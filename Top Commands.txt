@@ -1,0 +1,31 @@
+/*Clonare il branch(-b) di Github su una cartella locale*/
+git clone -b gh-pages https://github.com/edospi20/Personalizzatore-Prosac.git .
+
+/*Quando faccio git push per caricare la cartella locale sul web è necessario indicare
+  anche un nome. Per settare il nome mi servo dello script gitConfig.sh. Quando faccio
+  git push Prosac successivamente dovrei ogni volta inserire username e password, ma 
+  con lo stesso script una volta inseriti una prima volta posso cacharli indicando
+  il tempo per il quale cacharli.*/
+
+/*Faccio partire lo script gitConfig.sh per configurare nome del repository da inserire 
+  dopo git push e durata di username e password*/
+  bash gitConfig.sh
+
+/*Per scaricare il repository dal web*/
+  git pull
+
+/*Per aggiungere ai file che Git traccia come appartenenti al Repository*/
+  git add nomefile [nomefile1] ... (-A per tutti)
+
+/*Per fare il commit delle modifiche. Per salvare nel repository locale le modifiche effettuate. 
+  Finché non faccio il commit i file aggiunti con add non fanno parte del Repository.
+  In seguito a un commit si aprirà l'editor di testo VIM e si chiederà di inserire una breve 
+  descrizione dei cambiamenti effettuati. (premere esc per passare alla modalità comandi, 
+  e :wq per salvare e uscire)*/
+  git commit -a
+
+/*Per caricare il repository dalla cartella locale al web*/  
+  git push Prosac
+
+/*Per eliminare le modifiche fatte durante una sessione (e consentire di fare il pull)*/
+  git stash
