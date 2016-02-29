@@ -3,29 +3,30 @@
 	position: relative;
 }
 
+#wrap-cl{
+	display: flex;
+	align-items: center;
+	margin-top: 3%;
+}
+
+#wrap-cl > div{
+	flex-grow: 1;
+	text-align: center;
+}
+
 #cloths {
-	width: 80%;
+	width: 60%;
 	margin: auto;
+	display: inline-block;
 }
 
 #cloths div > img {
 	margin: auto;
-}
-
-#cloths div:focus > img {
-	border: 3px solid navy;
-}
-
-/*#cloths > div{
-	padding: 0;
-}*/
-
-#cloths > div > img{
-	/*display: inline-block;*/
 	border-radius: 1em;
 	box-shadow: 0.1em 0.1em 0.2em grey;
 	cursor: pointer;
-/*	position: relative;		
+	width: 22%;
+	position: relative;		
 	overflow: hidden;
 	border-radius: 1em;
 	box-shadow: 0.1em 0.1em 0.2em grey;
@@ -34,7 +35,15 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-origin: border-box;
-	background-clip: border-box;*/
+	background-clip: border-box;
+}
+
+#cloths div:focus > img {
+	border: 3px solid navy;
+}
+
+#cloths > div{
+	padding: 0;
 }
 
 .type-acc {
@@ -42,8 +51,9 @@
 	font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
     font-size: 1.2vw;
 	position: relative;
-	float: left;
-	margin: 1.8em 4em 0 3.5em
+	display: inline-block;
+	text-align: center;
+	flex-grow: 1;
 }
 
 .prev-next-buttons {
@@ -58,6 +68,10 @@
 	/*position: relative;
 	float:left;*/
 }
+
+/*#prev-cl{
+	float: left;
+}*/
 
 /*#cloths .slick-prev:before{
 	color: green;
