@@ -2,11 +2,13 @@
 
 $(function() {
 
-var cloths = $('#cloths');
+var slider = $('.slider');
+var cloths = slider.find('div:eq(1) > div');
+var buttons = slider.find('button');
 
 cloths.slick({
 	accessibility: true,
-	arrows: false,
+	arrows: true,
 	dots: true,
 	focusOnSelect: true,
 	infinite: true,
@@ -19,8 +21,8 @@ cloths.slick({
 	
 	// TODO: LE FRECCE NON FUNZIANOH
 	
-	/*prevArrow: '<button type="button" class="slick-prev">&lt;</button>',
-	nextArrow: '<button type="button" class="slick-next">&gt;</button>',*/
+	prevArrow: buttons.eq(0),
+	nextArrow: buttons.eq(1)
 	
 });
 
