@@ -3,24 +3,25 @@
 	position: relative;
 }
 
-#wrap-cl{
+.slider {
 	display: flex;
 	align-items: center;
 	margin-top: 3%;
 }
 
-#wrap-cl > div{
+.slider > div {
 	flex-grow: 1;
 	text-align: center;
 }
 
-#cloths {
+.slider > div:nth-of-type(2) {
 	width: 60%;
-	margin: auto;
 	display: inline-block;
 }
 
-#cloths div > img {
+/*
+
+.slider div > img {
 	margin: auto;
 	border-radius: 1em;
 	box-shadow: 0.1em 0.1em 0.2em grey;
@@ -38,11 +39,13 @@
 	background-clip: border-box;
 }
 
-#cloths div:focus > img {
+*/
+
+.slider div:focus > img {
 	border: 3px solid navy;
 }
 
-#cloths > div{
+.slider > div {
 	padding: 0;
 }
 
@@ -56,7 +59,7 @@
 	flex-grow: 1;
 }
 
-.prev-next-buttons {
+.slider > div > button {
 	width: 1.5em;
 	height: 1.5em;
 	color: white;
