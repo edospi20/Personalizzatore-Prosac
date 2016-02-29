@@ -3,7 +3,14 @@
 	position: relative;
 }
 
-.type-acc {
+.slider {
+	display: flex;
+	align-items: center;
+	margin-top: 2%;
+	background: red;
+}
+
+.slider h1 {
 	text-transform: uppercase;
 	font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
     font-size: 1.2vw;
@@ -13,12 +20,6 @@
 	flex-grow: 1;
 }
 
-.slider {
-	display: flex;
-	align-items: center;
-	margin-top: 2%;
-	background: red;
-}
 
 .slider > div {
 	flex-grow: 1;
