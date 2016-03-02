@@ -42,7 +42,7 @@
     border-radius: 1em;
     box-shadow: 0.1em 0.1em 0.2em grey;
     cursor: pointer;
-    width: 22%;
+    width: 26%;
     cursor: pointer; }
   .slider div:focus > img {
     /* MODIFICA QUI */
