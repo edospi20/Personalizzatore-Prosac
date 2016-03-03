@@ -5,23 +5,19 @@
 .slider {
   display: flex;
   align-items: center;
-  margin-top: 2%; }
+  margin-top: 2%;
+  text-align: center; }
   .slider h1 {
     text-transform: uppercase;
     font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
     font-size: 1.2vw;
-    position: relative;
-    display: inline-block;
-    text-align: center;
-    flex-grow: 1; }
+    flex-grow: 2; }
   .slider > div {
     flex-grow: 1;
-    text-align: center;
     padding: 0; }
     .slider > div:nth-of-type(2) {
       flex-grow: 0;
-      width: 60%;
-      display: inline-block; }
+      width: 60%; }
       .slider > div:nth-of-type(2) > div {
         margin-top: 3.8%; }
     .slider > div > button {
