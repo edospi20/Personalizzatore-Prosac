@@ -18,13 +18,10 @@
 				slide: 'div',
 				slidesToShow: 3,
 				slidesToScroll: 3,
-				useCSS: true,
-				
-				// TODO: LE FRECCE NON FUNZIANOH
-				
+				useCSS: true,				
 				prevArrow: buttons.eq(0),
 				nextArrow: buttons.eq(1)	
-			});		
+			});
 		});
 	});
 })(jQuery);
