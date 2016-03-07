@@ -10,3 +10,7 @@
 # Linux
 
 **/*~
+
+# Netbeans data
+
+**/nbproject
