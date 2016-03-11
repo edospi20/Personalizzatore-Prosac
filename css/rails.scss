@@ -1,3 +1,20 @@
+@mixin img-fade($duration) {
+	position: relative;
+
+	&:after {
+		z-index: -1;
+		content: '';
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0;
+		background-position: -100% center;
+		opacity: 0;
+		-webkit-transition: opacity $duration;
+		-moz-transition:    opacity $duration;
+		-o-transition:      opacity $duration;
+		transition: opacity $duration;
+	}
+}
+
 .papillon {
 	position: relative;
 	z-index: 0;
@@ -6,24 +23,18 @@
 	div.mask {
 		z-index: 1;
 		display: inline-block;
-		position: relative;
 		background-image: url('../img/stoffe_masc/_DSC3509.jpg');
 		background-position: center center;
 		background-repeat: repeat;
+		@include img-fade(0.5s);
+
+		img {
+			margin-bottom: -1%;
+		}
 
 		&:after {
-			z-index: -1;
-			content: '';
-			position: absolute;
-			top: 0; left: 0; bottom: 0; right: 0;
 			background-image: url('../img/stoffe_masc/_DSC3508.jpg');
-			background-position: -100% center;
 			background-repeat: repeat;
-			opacity: 0;
-			-webkit-transition: opacity 0.5s;
-			-moz-transition:    opacity 0.5s;
-			-o-transition:      opacity 0.5s;
-			transition: opacity 0.5s;
 		}
 
 		&:hover:after {
