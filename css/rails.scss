@@ -1,4 +1,4 @@
-@mixin img-fade($duration) {
+@mixin img-fade($duration, $initial-bg) {
 	position: relative;
 
 	&:after {
@@ -6,6 +6,8 @@
 		content: '';
 		position: absolute;
 		top: 0; left: 0; bottom: 0; right: 0;
+		background-image: $initial-bg;
+		background-repeat: repeat;
 		background-position: -100% center;
 		opacity: 0;
 		-webkit-transition: opacity $duration;
@@ -20,21 +22,16 @@
 	z-index: 0;
 	text-align: center;
 
-	div.mask {
+	div.cloth {
 		z-index: 1;
 		display: inline-block;
 		background-image: url('../img/stoffe_masc/_DSC3509.jpg');
 		background-position: center center;
 		background-repeat: repeat;
-		@include img-fade(0.5s);
+		@include img-fade(0.5s, url('../img/stoffe_masc/_DSC3508.jpg'));
 
 		img {
 			margin-bottom: -1%;
-		}
-
-		&:after {
-			background-image: url('../img/stoffe_masc/_DSC3508.jpg');
-			background-repeat: repeat;
 		}
 
 		&:hover:after {
