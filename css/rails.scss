@@ -1,4 +1,4 @@
-@mixin img-fade($duration, $initial-bg) {
+@mixin img-fade($duration) {
 	position: relative;
 
 	&:after {
@@ -6,8 +6,6 @@
 		content: '';
 		position: absolute;
 		top: 0; left: 0; bottom: 0; right: 0;
-		background-image: $initial-bg;
-		background-repeat: repeat;
 		background-position: -100% center;
 		opacity: 0;
 		-webkit-transition: opacity $duration;
@@ -17,41 +15,52 @@
 	}
 }
 
+$anim-duration: 0.5s;
+
 .papillon {
 	position: relative;
 	z-index: 0;
 	text-align: center;
 
-	div.cloth {
-		z-index: 1;
-		display: inline-block;
-		background-image: url('../img/stoffe_masc/_DSC3509.jpg');
-		background-position: center center;
-		background-repeat: repeat;
-		@include img-fade(0.5s, url('../img/stoffe_masc/_DSC3508.jpg'));
+	div {
+		&.cloth {
+			z-index: 1;
+			display: inline-block;
+			background-image: url('../img/stoffe_masc/_DSC3509.jpg');
+			background-position: center center;
+			background-repeat: repeat;
+			@include img-fade($anim-duration);
 
-		img {
-			margin-bottom: -1%;
+			img {
+				margin-bottom: -1%;
+			}
+
+			/* To remove after jQuery tweaking */
+
+			&:after {
+				background-image: url('../img/stoffe_masc/_DSC3508.jpg');
+				background-repeat: repeat;
+			}
+
+			&:hover:after {
+				opacity: 1;
+			}
 		}
 
-		&:hover:after {
-			opacity: 1;
-		}
-	}
-
-	img {
 		&.band {
+			z-index: 3;
 			position: absolute;
 /*			top: nonFateloFareAMeCheVieneUnoSchifo;
 			left: nonSonoBuonoProprioMaiAFareQuesteCose;*/
-			z-index: 3;
+			@include img-fade($anim-duration);
 		}
 
 		&.button {
+			z-index: 4;
 			position: absolute;
 /*			top: nonVoleteCheLoFacciaIo;
 			left: nonSoPiùComeFarviCapireCheProprioNo;*/
-			z-index: 4;
+			@include img-fade($anim-duration);
 		}
 	}
 }
